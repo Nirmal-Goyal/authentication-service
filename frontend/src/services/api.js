@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -31,10 +31,10 @@ api.interceptors.response.use(
 export const authAPI = {
     register: (name, email, password, age) =>
         api.post('/auth/register', { name, email, password, age }),
-    
+
     login: (email, password) =>
         api.post('/auth/login', { email, password }),
-    
+
     getProfile: () =>
         api.get('/auth/profile'),
 };
@@ -42,7 +42,7 @@ export const authAPI = {
 export const dashboardAPI = {
     getStats: () =>
         api.get('/dashboard/stats'),
-    
+
     getUptime: () =>
         api.get('/dashboard/uptime'),
 };
